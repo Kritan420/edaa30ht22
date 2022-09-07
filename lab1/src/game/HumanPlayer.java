@@ -25,7 +25,7 @@ public class HumanPlayer extends Player {
 		}
 		
 		b.takePins(n);
-		
+		//test
 		return n;
 		
 	}
