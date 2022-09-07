@@ -15,18 +15,15 @@ public class ComputerPlayer extends Player {
 			n = 1+rand.nextInt(2);
 			if (b.getNoPins() == 1) {
 				n = 1;
-				b.takePins(n);
 			}
 			else if (b.getNoPins() == 2) {
 				n = 2;
-				b.takePins(n);
 			}
 
-			else {
-				b.takePins(n);
-			}
+
 			
 		}
+		b.takePins(n);
 		return n;
 		
 	}
