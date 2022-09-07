@@ -8,13 +8,11 @@ public class TakePinsGame {
 	public static void main(String[] args) {
 		Board b = new Board();
 		HumanPlayer hp = new HumanPlayer(JOptionPane.showInputDialog("Ditt namn:")); 
-		UserInterface.printMessage("Ditt namn är " + hp.userId);
 		
 		ComputerPlayer cp = new ComputerPlayer(JOptionPane.showInputDialog("Computerns namn:"));
-		UserInterface.printMessage("Computerns namn är " + cp.userId);
 
-		b.setUp(UserInterface.askForInt(JOptionPane.showInputDialog("Hur många stickor?"), 1));
-		UserInterface.printMessage("Du valde " + Integer.toString(b.getNoPins()) + " stickor");
+		b.setUp(UserInterface.askForInt(JOptionPane.showInputDialog("Hur många stickor vill du spela med?"), 1));
+		UserInterface.printMessage(hp.userId + " vs. " + cp.userId + "\nSpelet börjar med " + Integer.toString(b.getNoPins()) + " stickor på bordet");
 		
 		
 		while (b.getNoPins() > 0) {
