@@ -1,5 +1,7 @@
 package game;
 
+import javax.swing.JOptionPane;
+
 public class Board {
 	private static int noPins = 0;
 	
