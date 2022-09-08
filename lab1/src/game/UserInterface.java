@@ -31,7 +31,7 @@ public class UserInterface {
 	}
 	
 	public static void exitGame() {
-		JOptionPane.showMessageDialog(null, "Spelet avslutas haha", "Cancel", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Spelet avslutas", "Cancel", JOptionPane.ERROR_MESSAGE);
 		System.exit(0);
 	}
 }
