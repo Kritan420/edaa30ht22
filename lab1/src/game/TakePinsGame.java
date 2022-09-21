@@ -8,15 +8,24 @@ public class TakePinsGame {
 	public static void main(String[] args) {
 		Board b = new Board();
 		Player cp = null;
-		String[] options = {"ComputerPlayer", "ModuloComputerPlayer"};
+		String[] options = {"ComputerPlayer", "ModuloComputerPlayer", "PrimeComputerPlayer"};
 		HumanPlayer hp = new HumanPlayer(JOptionPane.showInputDialog("Ditt namn:"));
 		String cpname = JOptionPane.showInputDialog("Computerns namn:");
+		int cpu = JOptionPane.showOptionDialog(null, "Välj din motspelare", "Välj", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+		
+		while (cpu == -1) {
+			UserInterface.printMessage("Välj cp, mcp eller pcp");
+			cpu = JOptionPane.showOptionDialog(null, "Välj din motspelare", "Välj", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+		}
 
-		if (JOptionPane.showOptionDialog(null, "Välj din motspelare", "Välj", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]) < 1) {
+		if (cpu == 0) {
 			cp = new ComputerPlayer(cpname);
 		}
-		else {
+		else if (cpu == 1) {
 			cp = new ModComputerPlayer(cpname);
+		}
+		else if (cpu == 2) {
+			cp = new PrimeComputerPlayer(cpname);
 		}
 		
 		b.setUp(UserInterface.askForInt(JOptionPane.showInputDialog("Hur många stickor vill du spela med?"), 1));
