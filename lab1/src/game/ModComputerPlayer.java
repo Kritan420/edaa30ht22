@@ -7,7 +7,7 @@ public class ModComputerPlayer extends Player {
 	public ModComputerPlayer(String id) {
 		super(id);
 	}
-	
+	//
 	public int takePins(Board b) {
 		Random rand = new Random();
 		int n = 0;

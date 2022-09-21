@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public abstract class Player {
 	protected String userId;
-	
+	//
 	public Player(String id) {
 
 
