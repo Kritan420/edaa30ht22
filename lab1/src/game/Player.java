@@ -25,5 +25,7 @@ public abstract class Player {
 	public String getUserId() {
 		return userId;
 	}
+
+	public abstract int takePins(Board b);
 	
 }
