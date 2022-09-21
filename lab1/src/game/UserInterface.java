@@ -10,7 +10,6 @@ public class UserInterface {
 
 	public static int askForInt(String msg, int id) {
 		
-		
 		while (!(msg == null) && !(msg.matches("[0-9]+"))) {
 			JOptionPane.showMessageDialog(null, "Endast positiva heltal", "Error", JOptionPane.ERROR_MESSAGE);
 			

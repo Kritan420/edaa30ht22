@@ -25,7 +25,6 @@ public class PrimeComputerPlayer extends Player{
 			}
 
 
-
 			
 		}
 		b.takePins(n);

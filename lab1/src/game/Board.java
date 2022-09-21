@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 public class Board {
 	private static int noPins = 0;
 	
-	
 	public void setUp(int n) {
 		while (n < 4) {
 			JOptionPane.showMessageDialog(null, "Du behöver minst 4 stickor för att spela", "Error", JOptionPane.ERROR_MESSAGE);

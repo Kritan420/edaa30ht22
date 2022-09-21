@@ -20,7 +20,6 @@ public class ComputerPlayer extends Player {
 				n = 2;
 			}
 
-
 			
 		}
 		b.takePins(n);
