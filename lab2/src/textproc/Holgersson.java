@@ -2,7 +2,9 @@ package textproc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
+
+import org.w3c.dom.Text;
 
 public class Holgersson {
 
@@ -13,20 +15,36 @@ public class Holgersson {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		TextProcessor p = new SingleWordCounter("nils");
-
-		Scanner s = new Scanner(new File("nilsholg.txt"));
+		Scanner s = new Scanner(new File("./lab2/nilsholg.txt"));
 		s.findWithinHorizon("\uFEFF", 1);
-		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); // se handledning
+		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+");
+		
+		Scanner t = new Scanner(new File("./lab2/undantagsord.txt"));
+		t.useDelimiter(" ");
+
+		Set<String> stopwords = new HashSet<String>();
+		while (t.hasNext()) {
+			stopwords.add(t.next());
+		}
+
+		ArrayList<TextProcessor> list = new ArrayList<TextProcessor>();
+		list.add(new SingleWordCounter("nils"));
+		list.add(new SingleWordCounter("norge"));
+		list.add(new MultiWordCounter(REGIONS));
+		list.add(new GeneralWordCounter(stopwords));
 
 		while (s.hasNext()) {
 			String word = s.next().toLowerCase();
-
-			p.process(word);
+			for (TextProcessor a : list) {
+				a.process(word);
+			}
 		}
 
 		s.close();
+		
+		for (TextProcessor a : list) {
+			a.report();
+		}
 
-		p.report();
 	}
 }
