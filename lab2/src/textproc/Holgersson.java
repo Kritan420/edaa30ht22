@@ -48,7 +48,6 @@ public class Holgersson {
 		}
 
 		long t1 = System.nanoTime();
-		double t = (t1 - t0) / 1000000000.0;
-		System.out.println("\n" + "tid: " + t  + "s" + "\n");
+		System.out.println("\n" + "tid: " + (t1 - t0) / 1000000000.0  + "s" + "\n");
 	}
 }
