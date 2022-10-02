@@ -22,18 +22,19 @@ public class GeneralWordCounter implements TextProcessor{
 	}
 
 	public void report() {
-        Set<Map.Entry<String, Integer>> wordSet = m.entrySet();
-        List<Map.Entry<String, Integer>> wordList = new ArrayList<>(wordSet);
+       // Set<Map.Entry<String, Integer>> wordSet = m.entrySet();
+        List<Map.Entry<String, Integer>> wordList = new ArrayList<>(m.entrySet());
         
         wordList.sort((a, b) -> { 
-                                if (b.getValue().compareTo(a.getValue()) != 0) {  
-                                    return b.getValue().compareTo(a.getValue());  
-                                } else {
-                                    return a.getKey().compareTo(b.getKey()); 
+                                    if (b.getValue().compareTo(a.getValue()) != 0) {  
+                                        return b.getValue().compareTo(a.getValue());  
+                                    } else {
+                                        return a.getKey().compareTo(b.getKey()); 
+                                    }
                                 }
-                                });   
+                    );   
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
                 System.out.println(wordList.get(i).getKey() + ": " + wordList.get(i).getValue());
             } 
 
