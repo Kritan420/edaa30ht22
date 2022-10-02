@@ -22,7 +22,6 @@ public class GeneralWordCounter implements TextProcessor{
 	}
 
 	public void report() {
-       // Set<Map.Entry<String, Integer>> wordSet = m.entrySet();
         List<Map.Entry<String, Integer>> wordList = new ArrayList<>(m.entrySet());
         
         wordList.sort((a, b) -> { 
