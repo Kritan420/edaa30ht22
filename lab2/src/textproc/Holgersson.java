@@ -15,16 +15,16 @@ public class Holgersson {
 	public static void main(String[] args) throws FileNotFoundException {
 		long t0 = System.nanoTime();
 		
-		Scanner s = new Scanner(new File("./lab2/nilsholg.txt"));
+		Scanner s = new Scanner(new File("./lab2/nilsholg.txt"), "UTF-8");
 		s.findWithinHorizon("\uFEFF", 1);
 		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+");
 		
-		Scanner u = new Scanner(new File("./lab2/undantagsord.txt"));
+		Scanner u = new Scanner(new File("./lab2/undantagsord.txt"), "UTF-8");
 		u.useDelimiter(" ");
 		Set<String> stopwords = new HashSet<String>();
 
 		while (u.hasNext()) {
-			stopwords.add(u.next());
+			stopwords.add(u.next().toLowerCase());
 		}
 
 		ArrayList<TextProcessor> list = new ArrayList<TextProcessor>();
