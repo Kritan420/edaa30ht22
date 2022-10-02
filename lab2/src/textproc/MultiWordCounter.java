@@ -4,10 +4,10 @@ import java.util.*;
 
 public class MultiWordCounter implements TextProcessor {
 
-    private Map<String, Integer> m = new HashMap<String, Integer>();
+    //private Map<String, Integer> m = new HashMap<String, Integer>();
+    private Map<String, Integer> m = new TreeMap<String, Integer>();
     
     public MultiWordCounter(String[] list) {
-
         for(String a : list) {
         m.put(a, 0);
         }
@@ -15,11 +15,9 @@ public class MultiWordCounter implements TextProcessor {
     }
 
 	public void process(String w) {
-        for(String a : m.keySet()){
-            if (a.equals(w)) {
+            if (m.containsKey(w)) {
                 m.replace(w, m.get(w)+1 );
-            }
-        }   
+            } 
 	}
 
 	public void report() {

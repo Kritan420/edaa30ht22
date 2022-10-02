@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-import org.w3c.dom.Text;
-
 public class Holgersson {
+	
 
 	public static final String[] REGIONS = { "blekinge", "bohuslän", "dalarna", "dalsland", "gotland", "gästrikland",
 			"halland", "hälsingland", "härjedalen", "jämtland", "lappland", "medelpad", "närke", "skåne", "småland",
@@ -14,17 +13,18 @@ public class Holgersson {
 			"öland", "östergötland" };
 
 	public static void main(String[] args) throws FileNotFoundException {
+		long t0 = System.nanoTime();
 		
 		Scanner s = new Scanner(new File("./lab2/nilsholg.txt"));
 		s.findWithinHorizon("\uFEFF", 1);
 		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+");
 		
-		Scanner t = new Scanner(new File("./lab2/undantagsord.txt"));
-		t.useDelimiter(" ");
-
+		Scanner u = new Scanner(new File("./lab2/undantagsord.txt"));
+		u.useDelimiter(" ");
 		Set<String> stopwords = new HashSet<String>();
-		while (t.hasNext()) {
-			stopwords.add(t.next());
+
+		while (u.hasNext()) {
+			stopwords.add(u.next());
 		}
 
 		ArrayList<TextProcessor> list = new ArrayList<TextProcessor>();
@@ -41,10 +41,14 @@ public class Holgersson {
 		}
 
 		s.close();
-		
+		u.close();
+
 		for (TextProcessor a : list) {
 			a.report();
 		}
 
+		long t1 = System.nanoTime();
+		double t = (t1 - t0) / 1000000000.0;
+		System.out.println("\n" + "tid: " + t  + "s" + "\n");
 	}
 }
