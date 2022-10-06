@@ -1,12 +1,11 @@
 package textproc;
 import java.util.*;
 
-public class GeneralWordCounter{
+public class GeneralWordCounter implements TextProcessor{
     
     private Set<String> stopwords;
-    private List<Map.Entry<String, Integer>> wordList;
     private Map<String, Integer> wMap = new TreeMap<String, Integer>();
-    //private Map<String, Integer> m = new HashMap<String, Integer>();
+    //private Map<String, Integer> wMap = new HashMap<String, Integer>();
     
 
     public GeneralWordCounter(Set<String> s) {
@@ -14,6 +13,7 @@ public class GeneralWordCounter{
     }
 
 	public void process(String w) {
+        w = w.replaceAll("[0-9]", stopwords.iterator().next());
         if (wMap.containsKey(w)) {
             wMap.replace(w, wMap.get(w)+1 );
         }
@@ -24,12 +24,13 @@ public class GeneralWordCounter{
 	}
 
     public List<Map.Entry<String, Integer>> getWordList() {
+        List<Map.Entry<String, Integer>> wordList = new ArrayList<>(wMap.entrySet());
         return wordList;
         }
         
 
 	public void report() {
-        wordList = new ArrayList<>(wMap.entrySet());
+        List<Map.Entry<String, Integer>>wordList = new ArrayList<>(wMap.entrySet());
         
         wordList.sort((a, b) -> { 
                                     if (b.getValue().compareTo(a.getValue()) != 0) {  
