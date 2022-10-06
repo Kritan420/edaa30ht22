@@ -17,13 +17,10 @@ public class SortedListModel<E> extends AbstractListModel<E> {
 		fireContentsChanged(this, 0, list.size());
 	}
 
-	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return list.size();
 	}
 
-	@Override
 	public E getElementAt(int index) {
 		return list.get(index);
 	}
