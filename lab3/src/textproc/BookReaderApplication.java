@@ -29,7 +29,7 @@ public class BookReaderApplication{
 		}
 		
 
-		BookReaderController brc = new BookReaderController(gwc);
+		new BookReaderController(gwc);
 		
 
 
