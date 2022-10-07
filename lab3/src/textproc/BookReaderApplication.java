@@ -1,4 +1,4 @@
-package textproc;
+package src.textproc;
 
 import java.util.*;
 import java.io.*;
