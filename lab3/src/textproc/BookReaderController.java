@@ -25,8 +25,8 @@ public class BookReaderController {
         JPanel jPanel = new JPanel();
         JButton alphB = new JButton("Alphabetic");
         JButton freqB = new JButton("Frequency");
-        JTextField jText = new JTextField(10);
         JButton searchB = new JButton("Search");
+        JTextField jText = new JTextField(10);
 
         alphB.addActionListener(event -> sortedListM.sort((w1, w2) -> {
             myList.ensureIndexIsVisible(0);
@@ -38,17 +38,22 @@ public class BookReaderController {
             return w2.getValue().compareTo(w1.getValue());
         }));
 
-        jText.addActionListener(event -> {
+        searchB.addActionListener(event -> {
+            boolean found = false;
             for (int i = 0; i < myList.getModel().getSize(); i++) {
-                if (myList.getModel().getElementAt(i).getKey().equals(jText.getText())) {
+                if (myList.getModel().getElementAt(i).getKey().equals(jText.getText().toLowerCase().trim())) {
                     myList.ensureIndexIsVisible(i);
                     myList.setSelectedIndex(i);
+                    found = true;
                 }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(frame, "Word not found", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         });
 
-        searchB.addActionListener(jText.getActionListeners()[0]);
+        jText.addActionListener(searchB.getActionListeners()[0]);
 
         jPanel.add(alphB);
         jPanel.add(freqB);
