@@ -12,8 +12,7 @@ public class BookReaderController {
 
     private void createWindow(GeneralWordCounter counter, String title, int width, int height) {
 
-        SortedListModel<Map.Entry<String, Integer>> sortedListM = new SortedListModel<Map.Entry<String, Integer>>(
-                counter.getWordList());
+        SortedListModel<Map.Entry<String, Integer>> sortedListM = new SortedListModel<Map.Entry<String, Integer>>(counter.getWordList());
 
         JList<Map.Entry<String, Integer>> myList = new JList<Map.Entry<String, Integer>>(sortedListM);
 
@@ -25,7 +24,7 @@ public class BookReaderController {
         JPanel jPanel = new JPanel();
         JButton alphB = new JButton("Alphabetic");
         JButton freqB = new JButton("Frequency");
-        JButton searchB = new JButton("Search");
+        JButton searchB = new JButton("Find");
         JTextField jText = new JTextField(10);
 
         alphB.addActionListener(event -> sortedListM.sort((w1, w2) -> {

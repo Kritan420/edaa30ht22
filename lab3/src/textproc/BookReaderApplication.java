@@ -15,7 +15,6 @@ public class BookReaderApplication{
 		Scanner u = new Scanner(new File("./lab3/undantagsord.txt"), "UTF-8");
 		u.useDelimiter(" ");
 
-
 		Set<String> stopwords = new HashSet<String>();
 
 		while (u.hasNext()) {
@@ -23,6 +22,7 @@ public class BookReaderApplication{
 		}
 
 		GeneralWordCounter gwc = new GeneralWordCounter(stopwords);
+
         while (s.hasNext()) {
 			String word = s.next().toLowerCase();
 			gwc.process(word);
@@ -31,13 +31,8 @@ public class BookReaderApplication{
 
 		new BookReaderController(gwc);
 		
-
-
 		s.close();
 		u.close();
-
-        
-
 
     }
 }
