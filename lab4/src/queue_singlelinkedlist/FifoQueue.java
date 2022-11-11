@@ -19,7 +19,31 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * 			to this queue, else false
 	 */
 	public boolean offer(E e) {
-		return false;
+
+		QueueNode<E> temp = new QueueNode<E>(e);
+
+		if (last == null) {    // om tom kö
+			last = temp;
+			size++;
+
+		} else {
+			if (last.next == null) {  // om en i kön
+
+				last.next = temp;
+				temp.next = last;
+				last = temp;
+				
+			} else {
+
+				temp.next = last.next;
+				last.next = temp;
+				last = temp;
+			}
+			size++;
+		}
+
+		return last.element.equals(e);
+
 	}
 	
 	/**	
@@ -27,7 +51,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * @return the number of elements in this queue
 	 */
 	public int size() {		
-		return 0;
+		return size;
 	}
 	
 	/**	
@@ -37,7 +61,9 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * 			if this queue is empty
 	 */
 	public E peek() {
-		return null;
+
+		return last == null ? null : last.next == null ? last.element : last.next.element;
+		
 	}
 
 	/**	
@@ -47,7 +73,24 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * @return 	the head of this queue, or null if the queue is empty 
 	 */
 	public E poll() {
-		return null;
+
+		if (size == 0) { // om tom
+			return null;
+		}
+
+		if (size == 1) { // om en i kön
+			QueueNode<E> temp = last;
+			last = null;
+			size--;
+			return temp.element;
+		}
+
+		QueueNode<E> temp = last.next;
+
+		last.next = temp.next == null ? null : temp.next;
+		
+		size--;
+		return temp.element;
 	}
 	
 	/**	
@@ -55,7 +98,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * @return an iterator over the elements in this queue
 	 */	
 	public Iterator<E> iterator() {
-		return null;
+		return new QueueIterator();
 	}
 	
 	private static class QueueNode<E> {
@@ -67,5 +110,30 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 			next = null;
 		}
 	}
+
+	private class QueueIterator implements Iterator<E> {
+		private QueueNode<E> pos = null;
+
+		/* Konstruktor */
+		private QueueIterator() {
+			pos = last != null ? last.next != null ? last : null : null;
+		}
+
+		public boolean hasNext() {	
+			return pos != null ? pos.next != null ? true : false : false;
+		}
+		public E next() {
+
+			if (pos == null || pos.next == null) {
+				throw new NoSuchElementException();
+			}
+
+			pos = pos.next;
+			return pos.element;
+
+			
+		}
+	}
+	
 
 }

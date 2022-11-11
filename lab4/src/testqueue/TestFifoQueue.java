@@ -1,5 +1,4 @@
 package testqueue;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,8 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import queue_delegate.FifoQueue;
-//import queue_singlelinkedlist.FifoQueue;
+//import queue_delegate.FifoQueue;
+import queue_singlelinkedlist.FifoQueue;
 
 import java.util.NoSuchElementException;
 import java.util.Queue;
@@ -157,8 +156,21 @@ class TestFifoQueue {
 			assertTrue(itr.hasNext(), "Wrong result from hasNext");
 			assertEquals(Integer.valueOf(i), itr.next(), "Wrong result from next");
 		}
+
+
+		
+		//FEL HÄR??? assertTrue i forloopen ovan, inget ändras med iteratorn, och nu assertFalse?
+
 		assertFalse(itr.hasNext(), "Wrong result from hasNext");
 		assertThrows(NoSuchElementException.class, () -> itr.next());
+
+		/**  DENNA FUNKAR, antar att det är detta som är tänkt?
+		 
+		 myIntQueue.clear();;
+		Iterator<Integer> itr2 = myIntQueue.iterator(); 
+		assertFalse(itr.hasNext(), "Wrong result from hasNext");
+		assertThrows(NoSuchElementException.class, () -> itr.next());
+		*/
 	}
 
 	/**
