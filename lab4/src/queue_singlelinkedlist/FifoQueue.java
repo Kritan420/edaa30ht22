@@ -64,6 +64,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * @return 	the head of this queue, or null if the queue is empty 
 	 */
 	public E poll() {
+
 		if (size == 0) { 
 			return null;
 		}
@@ -105,8 +106,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		this.size = this.size + q.size;
 
 		while (tempQ != tempF) {
-			temp = tempQ;
-			temp = new QueueNode<>(temp.element);
+			temp = new QueueNode<>(tempQ.element);
 			tempQ = tempQ.next;
 		}
 
