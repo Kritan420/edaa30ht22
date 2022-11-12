@@ -1,10 +1,6 @@
 package queue_singlelinkedlist;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.*;
-
-import org.junit.Ignore;
-import org.junit.jupiter.params.provider.NullEnum;
 
 public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	private QueueNode<E> last;
@@ -29,7 +25,6 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 
 		if (last == null) {    
 			last = temp;
-			size++;
 		} else {
 			if (last.next == null) {  
 				last.next = temp;
@@ -39,8 +34,9 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 				last.next = temp;
 			}
 			last = temp;
-			size++;
 		}
+
+		size = last.element.equals(e) ? size + 1 : size;
 		return last.element.equals(e);
 
 	}
@@ -74,8 +70,8 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		if (size == 0) { 
 			return null;
 		}
+
 		QueueNode<E> temp = last;
-		
 		if (size == 1) { 
 			last = null;
 			size--;
@@ -83,10 +79,9 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		}
 
 		temp = last.next;
-		
 		last.next = temp.next == null ? null : temp.next;
-		
 		size--;
+
 		return temp.element;
 	}
 	
@@ -156,9 +151,11 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 			return pos != null ? pos.next != null ? true : false : false;
 		}
 		public E next() {
+
 			if (pos == null || pos.next == null) {
 				throw new NoSuchElementException();
 			}
+
 			pos = pos.next;
 			return pos.element;
 		}
