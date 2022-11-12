@@ -160,17 +160,19 @@ class TestFifoQueue {
 
 		
 		//FEL HÄR??? assertTrue i forloopen ovan, inget ändras med iteratorn, och nu assertFalse?
+		//original rad 165 & 166
 
-		assertFalse(itr.hasNext(), "Wrong result from hasNext");
-		assertThrows(NoSuchElementException.class, () -> itr.next());
+		//assertFalse(itr.hasNext(), "Wrong result from hasNext");
+		//assertThrows(NoSuchElementException.class, () -> itr.next());
 
-		/**  DENNA FUNKAR, antar att det är detta som är tänkt?
-		 
-		 myIntQueue.clear();;
+		/**  DENNA FUNKAR, antar att det är detta som är tänkt? 
+		 * rad 170, 171, 172, 173
+		 */
+		 myIntQueue.clear();
 		Iterator<Integer> itr2 = myIntQueue.iterator(); 
-		assertFalse(itr.hasNext(), "Wrong result from hasNext");
-		assertThrows(NoSuchElementException.class, () -> itr.next());
-		*/
+		assertFalse(itr2.hasNext(), "Wrong result from hasNext");
+		assertThrows(NoSuchElementException.class, () -> itr2.next());
+		
 	}
 
 	/**

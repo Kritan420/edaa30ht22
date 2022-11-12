@@ -1,5 +1,10 @@
 package queue_singlelinkedlist;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.*;
+
+import org.junit.Ignore;
+import org.junit.jupiter.params.provider.NullEnum;
 
 public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	private QueueNode<E> last;
@@ -22,26 +27,21 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 
 		QueueNode<E> temp = new QueueNode<E>(e);
 
-		if (last == null) {    // om tom kö
+		if (last == null) {    
 			last = temp;
 			size++;
-
 		} else {
-			if (last.next == null) {  // om en i kön
-
+			if (last.next == null) {  
 				last.next = temp;
 				temp.next = last;
-				last = temp;
-				
 			} else {
-
 				temp.next = last.next;
 				last.next = temp;
-				last = temp;
+
 			}
+			last = temp;
 			size++;
 		}
-
 		return last.element.equals(e);
 
 	}
@@ -61,9 +61,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 * 			if this queue is empty
 	 */
 	public E peek() {
-
 		return last == null ? null : last.next == null ? last.element : last.next.element;
-		
 	}
 
 	/**	
@@ -74,25 +72,61 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	 */
 	public E poll() {
 
-		if (size == 0) { // om tom
+		if (size == 0) { 
 			return null;
 		}
-
-		if (size == 1) { // om en i kön
-			QueueNode<E> temp = last;
+		QueueNode<E> temp = last;
+		
+		if (size == 1) { 
 			last = null;
 			size--;
 			return temp.element;
 		}
 
-		QueueNode<E> temp = last.next;
-
+		temp = last.next;
+		
 		last.next = temp.next == null ? null : temp.next;
 		
 		size--;
 		return temp.element;
 	}
 	
+	/**
+	 * Appends the specified queue to this queue
+	 * post: all elements from the specified queue are appended
+	 * to this queue. The specified queue (q) is empty after the call.
+	 * 
+	 * @param q the queue to append
+	 * @throws IllegalArgumentException if this queue and q are identical
+	 */
+	public void append(FifoQueue<E> q) {
+	
+		if (q.equals(this)) {
+			throw new IllegalArgumentException();
+		} else if (this.isEmpty() || q.isEmpty()) {
+			throw new NullPointerException();
+		}
+
+		QueueNode<E> tempF = this.last.next;
+		QueueNode<E> temp = this.last;
+		QueueNode<E> tempQ = q.last.next;
+		temp.next = tempQ;
+		q.last.next = tempF;
+		this.size = this.size + q.size;
+
+		while (tempQ != tempF) {
+			temp = new QueueNode<>(temp.element);
+			temp.next = tempQ;
+			tempQ = tempQ.next;
+		}
+
+		this.last = temp;
+		this.last.next = tempF;
+		
+		q.clear();
+
+	}
+
 	/**	
 	 * Returns an iterator over the elements in this queue
 	 * @return an iterator over the elements in this queue
@@ -123,15 +157,11 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 			return pos != null ? pos.next != null ? true : false : false;
 		}
 		public E next() {
-
 			if (pos == null || pos.next == null) {
 				throw new NoSuchElementException();
 			}
-
 			pos = pos.next;
 			return pos.element;
-
-			
 		}
 	}
 	
