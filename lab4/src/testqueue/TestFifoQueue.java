@@ -174,14 +174,14 @@ class TestFifoQueue {
 
 
 		
-		//FEL HÄR??? assertTrue i forloopen ovan, inget ändras med iteratorn, och nu assertFalse?
-		//original rad 165 & 166
+		//FEL HÄR??? assertTrue hasNext i forloopen ovan, inget ändras med iteratorn, och nu assertFalse hasNext?
+		//original rad 180 & 181
 
 		//assertFalse(itr.hasNext(), "Wrong result from hasNext");
 		//assertThrows(NoSuchElementException.class, () -> itr.next());
 
 		/**  DENNA FUNKAR, antar att det är detta som är tänkt? 
-		 * rad 170, 171, 172, 173
+		 * rad 186, 187, 188, 189
 		 */
 		 myIntQueue.clear();
 		Iterator<Integer> itr2 = myIntQueue.iterator(); 
