@@ -37,7 +37,6 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 			} else {
 				temp.next = last.next;
 				last.next = temp;
-
 			}
 			last = temp;
 			size++;
