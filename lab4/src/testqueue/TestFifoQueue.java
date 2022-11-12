@@ -60,6 +60,21 @@ class TestFifoQueue {
 		assertEquals(0, myIntQueue.size(), "Wrong size after poll");
 	}
 
+		/**
+	 * Test a multiple offer followed by multiple poll.
+	 */
+	@Test
+	void testMultiplePoll() {
+		for (int i = 1; i <= 10; i++) {
+			myIntQueue.offer(i);
+		}
+		for (int i = 1; i <= 10; i++) {
+			int k = myIntQueue.poll();
+			assertEquals(i, k, "poll returns incorrect element");
+		}
+		assertEquals(0, myIntQueue.size(), "Wrong size after poll");
+	}
+
 	/**
 	 * Test peek of empty queue.
 	 */
