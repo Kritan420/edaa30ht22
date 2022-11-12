@@ -9,9 +9,9 @@ public class Test {
         FifoQueue<Integer> q = new FifoQueue<Integer>();
 
         
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 20; i++) {
          f.offer(i);
-         q.offer(i+10);
+         q.offer(i+20);
          
         }
         
