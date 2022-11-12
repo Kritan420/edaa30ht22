@@ -47,6 +47,8 @@ public class TestAppendFifoQueue {
         Q2 = null;
         Q1e = null;
         Q2e = null;
+        Q1s = null;
+        Q2s = null;
 	}
 
 
