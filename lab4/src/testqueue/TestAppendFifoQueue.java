@@ -23,18 +23,23 @@ public class TestAppendFifoQueue {
     private FifoQueue<Integer> Q2e;
     private FifoQueue<String> Q1s;
     private FifoQueue<String> Q2s;
+
     @BeforeEach
 	void setUp() {
 		Q1 = new FifoQueue<Integer>();
         Q2 = new FifoQueue<Integer>();
+
         for (int i = 1; i <= 5; i++) {
             Q1.offer(i);
             Q2.offer(i+5);
         }
+
         Q1e  = new FifoQueue<Integer>();
         Q2e = new FifoQueue<Integer>();
+
         Q1s  = new FifoQueue<String>();
         Q2s = new FifoQueue<String>();
+
         for (int i = 1; i <= 5; i++) {
             Q1s.offer("Sofiero " + Integer.toString(i));
             Q2s.offer("Sofie " + Integer.toString(i+5));
@@ -54,7 +59,7 @@ public class TestAppendFifoQueue {
 
 	@Test
 	void testSize() {
-        assertTrue(Q1.size() == 5 && Q1e.size() == 0 && Q2.size() == 5 &&  Q2e.size() == 0, "Sizes wrong");
+        assertTrue(Q1.size() == 5 && Q1e.size() == 0 && Q2.size() == 5 &&  Q2e.size() == 0 && Q1s.size() == 5 && Q2s.size() == 5, "Sizes wrong");
 	}
 
     @Test
