@@ -65,13 +65,12 @@ public class TestAppendFifoQueue {
     @Test
     void testEmpty() {
         assertTrue(Q1e.isEmpty() && Q2e.isEmpty(), "Queues empty wrong");
-        assertThrows(NullPointerException.class, () -> Q1e.append(Q2e));
     }
     @Test
     void emptyOnNot() {
+        Q1.append(Q2e);
         assertTrue(!Q1.isEmpty() && !Q2.isEmpty() && Q1e.isEmpty() && Q2e.isEmpty(), "Queues empty state wrong");
-        assertThrows(NullPointerException.class, () -> Q1.append(Q2e));
-        assertThrows(NullPointerException.class, () -> Q1e.append(Q2));
+    
     }
 
 	@Test

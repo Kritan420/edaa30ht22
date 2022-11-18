@@ -24,17 +24,13 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 
 		if (last == null) {    
 			last = temp;
+			last.next = last;
 		} else {
-			if (last.next == null) {  
-				last.next = temp;
-				temp.next = last;
-			} else {
-				temp.next = last.next;
-				last.next = temp;
-			}
-			last = temp;
+			temp.next = last.next;
+			last.next = temp;
 		}
-
+			
+		last = temp;
 		size = last.element.equals(e) ? size + 1 : size;
 		return last.element.equals(e);
 	}
@@ -70,6 +66,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		}
 
 		QueueNode<E> temp = last;
+
 		if (size == 1) { 
 			last = null;
 			size--;
@@ -77,10 +74,9 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		}
 
 		temp = last.next;
-		last.next = temp.next == null ? null : temp.next;
-		  
-		size--;
+		last.next = temp.next;
 
+		size--;
 		return temp.element;
 	}
 	
@@ -95,28 +91,25 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 	public void append(FifoQueue<E> q) {
 		if (q.equals(this)) {
 			throw new IllegalArgumentException();
-		} else if (this.isEmpty() || q.isEmpty()) {
-			throw new NullPointerException();
 		}
+
+		if (last == null) {
+			last = q.last;
+		} else if (q.last == null) {
+			return;
+		} else {
 
 		QueueNode<E> tempF = this.last.next;
-		QueueNode<E> temp = this.last;
 		QueueNode<E> tempQ = q.last.next;
-		
-		temp.next = tempQ;
+
+		this.last.next = tempQ;
 		q.last.next = tempF;
-
-		this.size = this.size + q.size;
-
-		while (tempQ != tempF) {
-			temp = new QueueNode<>(tempQ.element);
-			tempQ = tempQ.next;
+		this.last = q.last;
 		}
 
-		this.last = temp;
-		this.last.next = tempF;
-		
-		q.clear();
+		this.size = this.size + q.size;
+		q.size = 0;
+		q.last = null;		
 	}
 
 	/**	
@@ -141,42 +134,15 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		private QueueNode<E> pos = null;
 
 		private QueueIterator() {
-			pos = last != null ? last.next != null ? last : null : null;
-
-			/**
-			 if (last != null) {
-				if (last.next != null) {
-					pos = last;
-				}
-				else {
-					pos = null;
-				}
-			 } else {
-				pos = null;
-			 }
-			
-			 */
+			pos = last;
 		}
 
 		public boolean hasNext() {	
 			return pos != null ? pos.next != null ? true : false : false;
-
-			/**
-			   if (pos != null) {
-				if (pos.next != null) {
-					return true;
-				}
-				else {
-					return false;
-				}
-				else {
-					return false;
-				}
-			} */
 		}
 
 		public E next() {
-			if (pos == null || pos.next == null) {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
 			if (pos.next == last) {
