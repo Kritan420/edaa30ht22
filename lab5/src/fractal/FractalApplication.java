@@ -7,16 +7,21 @@ import mountain.Point;
 public class FractalApplication {
 	public static void main(String[] args) {
 
-		int length = 300;
-		// 150 + 250 = 400
-		// 
-		Point a = new Point(length/2, length + length/3);
-		Point b = new Point(length/3 + length/2, length*2/3);
-		Point c = new Point(length + length/2, length + length/3 + length/10);
+		/** 
+		a: 150, 400
+		b: 250, 200
+		c: 450, 430
+		*/
+
+		Point a = new Point(50, 500);
+		Point b = new Point(200, 40);
+		Point c = new Point(530, 520);
+
 
 		Fractal[] fractals = new Fractal[2];
-		fractals[0] = new Mountain(a, b, c);
-		fractals[1] = new Koch(length);
+		fractals[0] = new Mountain(a, b, c,38.0);
+		fractals[1] = new Koch(300);
 	    new FractalView(fractals, "Fraktaler", 600, 600);
 	}
+
 }
