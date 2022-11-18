@@ -89,7 +89,7 @@ public class Mountain extends Fractal{
 			mid = map.get(side);
 			map.remove(side);
 		} else {
-			mid = new Point(((a.getX() + b.getX()) /2) , (int)(((a.getY() + b.getY()) / 2) + RandomUtilities.randFunc(dev))  );
+			mid = new Point(((a.getX() + b.getX()) /2) , (int)(((a.getY() + b.getY()) / 2) + Math.abs(RandomUtilities.randFunc(dev)))  );
 			map.put(side, mid);
 		}
 		return mid;
