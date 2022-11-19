@@ -2,7 +2,7 @@ package queue_singlelinkedlist;
 
 import java.util.*;
 
-public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
+public class FifoQueue<E> extends AbstractQueue<E>/**  implements Queue<E> */{
 	private QueueNode<E> last;
 	private int size;
 

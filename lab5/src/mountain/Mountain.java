@@ -37,25 +37,28 @@ public class Mountain extends Fractal{
 	 */
     @Override
 	public void draw(TurtleGraphics turtle) {
-        //turtle.penDown();
-        fractalLine(turtle, order, a, b, c, dev);
-        //turtle.penUp();
+
+		fractalLine(turtle, order, a, b, c, dev);
+
+       
 	}
 
     	/* 
 	 * Reursive method: Draws a recursive line of the mountain. 
 	 */
 	private void fractalLine(TurtleGraphics turtle, int order, Point a, Point b, Point c, double dev) {
-		TurtleGraphics t = turtle;
+		
 		if (order == 0) {
-			t.moveTo(a.getX(), a.getY());
-            t.penDown();
-            t.forwardTo(b.getX(), b.getY());
-            t.forwardTo(c.getX(), c.getY());
-            t.forwardTo(a.getX(), a.getY());
-			t.penUp();
+			turtle.penUp();
+			turtle.moveTo(a.getX(), a.getY());
+			turtle.penDown();
+			turtle.forwardTo(b.getX(), b.getY());
+			turtle.forwardTo(c.getX(), c.getY());
+			turtle.forwardTo(a.getX(), a.getY());
+
 		}
 		else {
+			
 			
 			Point ab = midPoint(a, b, dev);
 			Point bc = midPoint(b, c, dev);
@@ -63,35 +66,35 @@ public class Mountain extends Fractal{
 
 			dev = dev/2;
 
+			fractalLine(turtle, order-1, a, ab, ac, dev);
+			fractalLine(turtle, order-1, b, ab, bc, dev);
+			fractalLine(turtle, order-1, c, bc, ac, dev);
+			fractalLine(turtle, order-1, ac, ab, bc, dev);
 
-			fractalLine(t, order-1, a, ab, ac, dev);
-			fractalLine(t, order-1, b, ab, bc, dev);
-			fractalLine(t, order-1, c, ac, bc, dev);
-            fractalLine(t, order-1, ab, bc, ac, dev);
-
-
-            /**fractalLine(t, order-1, a, ab, ac, dev);
-			fractalLine(t, order-1, ab, b, bc, dev);
-            fractalLine(t, order-1, ab, bc, ac, dev);
-            fractalLine(t, order-1, c, ac, bc, dev);
-*/
-			
-			//Math.abs(order)
-			
 
 		}
 	}
 
 	public Point midPoint(Point a, Point b, double dev)  {
-		Side side = new Side(a, b);
 		Point mid;
+
+		Side side = new Side(a, b);
+		
 		if (map.containsKey(side)) {
 			mid = map.get(side);
 			map.remove(side);
+
 		} else {
-			mid = new Point(((a.getX() + b.getX()) /2) , (int)(((a.getY() + b.getY()) / 2) + Math.abs(RandomUtilities.randFunc(dev)))  );
+
+			int midX = ((a.getX() + b.getX()) /2);
+			int midY = ((a.getY() + b.getY()) /2);
+
+			mid = new Point( midX , (midY + (int)Math.rint(RandomUtilities.randFunc(dev))) );
 			map.put(side, mid);
 		}
+
 		return mid;
+
+		
 	}
 }

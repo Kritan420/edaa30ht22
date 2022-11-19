@@ -1,6 +1,4 @@
 package testqueue;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,8 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import queue_singlelinkedlist.FifoQueue;
 
-import java.util.NoSuchElementException;
-import java.util.Queue;
 import java.util.Iterator;
 
 public class TestAppendFifoQueue {
