@@ -36,7 +36,7 @@ public abstract class Fractal {
 	public String toString() {
 		return getTitle();
 	}
-
+	
 	/** Draws the fractal.  
 	 * @param g the turtle graphic object
 	 */

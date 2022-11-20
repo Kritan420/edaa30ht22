@@ -18,7 +18,7 @@ public class Side {
     public boolean equals(Object o) {
         if (o instanceof Side) {
             Side side = (Side) o;
-            return side.hashCode() == this.hashCode();
+           return (side.a == a && side.b == b) || (side.b == a && side.a == b);
         } else {
             return false;
         }
