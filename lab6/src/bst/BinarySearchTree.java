@@ -13,14 +13,18 @@ public class BinarySearchTree<E> {
 	 * Constructs an empty binary search tree.
 	 */
 	public BinarySearchTree() {
-		
+		root = null;
+		size = 0;
+		ccomparator = (e1, e2) -> ((Comparable<E>) e1).compareTo(e2);
 	}
 	
 	/**
 	 * Constructs an empty binary search tree, sorted according to the specified comparator.
 	 */
 	public BinarySearchTree(Comparator<E> comparator) {
-		
+		root = null;
+		size = 0;
+		ccomparator = comparator;
 	}
 
 	/**
@@ -29,15 +33,50 @@ public class BinarySearchTree<E> {
 	 * @return true if the the element was inserted
 	 */
 	public boolean add(E x) {
-		return false;
+
+		root = insertAdd(root, x);
+		return true;
 	}
-	
+
+	private BinaryNode<E> insertAdd(BinaryNode<E> node, E x) {
+
+		if (node == null ) {
+			node = new BinaryNode<E>(x);
+			size++;
+			return node;
+		}
+		else {
+			if (ccomparator.compare(node.element, x) > 0) {
+				node.left = insertAdd(node.left, x);
+			} else if (ccomparator.compare(node.element, x) < 0) {
+				node.right = insertAdd(node.right, x);
+			}
+		}
+		
+		return node;
+	}
+
+
 	/**
 	 * Computes the height of tree.
 	 * @return the height of the tree
 	 */
 	public int height() {
-		return 0;
+		return calcHeight(root);
+	}
+
+	private int calcHeight(BinaryNode<E> node) {
+
+		if (node == null || (root.left == null && root.right == null)) {
+			return 0;
+		} else {
+			int leftHeight = calcHeight(node.left);
+			int rightHeight = calcHeight(node.right);
+
+			return Math.max(leftHeight, rightHeight) +1;
+			
+		}
+
 	}
 	
 	/**
@@ -45,21 +84,31 @@ public class BinarySearchTree<E> {
 	 * @return the number of elements in this tree
 	 */
 	public int size() {
-		return 0;
+		return size;
 	}
 	
 	/**
 	 * Removes all of the elements from this list.
 	 */
 	public void clear() {
-		
+		root = null;
+		size = 0;
 	}
 	
 	/**
 	 * Print tree contents in inorder.
 	 */
 	public void printTree() {
+		printInOrder(root);
 
+	}
+
+	private void printInOrder(BinaryNode<E> node) {
+		if (node != null) {
+			printInOrder(node.left);
+			System.out.print(node.element + " ");
+			printInOrder(node.right);
+		}
 	}
 
 	/** 
