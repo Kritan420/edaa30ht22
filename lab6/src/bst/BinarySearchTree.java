@@ -3,6 +3,8 @@ package bst;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import javax.swing.text.html.parser.Element;
+
 
 public class BinarySearchTree<E> {
   BinaryNode<E> root;  // Används också i BSTVisaulizer
@@ -34,8 +36,12 @@ public class BinarySearchTree<E> {
 	 */
 	public boolean add(E x) {
 
+		if (search(root, x)) {
+			return false;
+		}
+
 		root = insertAdd(root, x);
-		
+
 		return search(root, x);
 	}
 
@@ -51,29 +57,29 @@ public class BinarySearchTree<E> {
 				node.left = insertAdd(node.left, x);
 			} else if (ccomparator.compare(node.element, x) < 0) {
 				node.right = insertAdd(node.right, x);
-			}
+			} 
 		}
 		
 		return node;
 	}
+
 	public boolean search(BinaryNode<E> node, E x) {
 
-		while (!node.element.equals(x)) {
-			if (ccomparator.compare(node.element, x) > 0) {
-				node = node.left;
-			}else if (ccomparator.compare(node.element, x) < 0) {
-				node = node.right;		
-			}
-			if (node == null) {
-				return false;
-			}
+	if (node == null ) {
+		return false;
+	} else {
+		if (ccomparator.compare(node.element, x) == 0) {
+			return true;
 		}
-
-		return node.element.equals(x);
-		
-		
+		else if (ccomparator.compare(node.element, x) > 0) {
+			return search(node.left, x);
+		}
+		else if (ccomparator.compare(node.element, x) < 0) {
+			return search(node.right, x);
+		}
 	}
-
+	return false;
+}
 
 	/**
 	 * Computes the height of tree.

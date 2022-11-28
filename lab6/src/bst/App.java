@@ -13,12 +13,19 @@ public class App {
         test.add(16);
         test.add(13);
 
-    //System.out.println(t);
 
-        //test.printTree();
+        test.printTree();
+        System.out.println(test.add(13));
+        test.printTree();
+        System.out.println(test.add(10));
+        test.printTree();
+        System.out.println(test.add(88));
+        test.printTree();
+
+        //
 
         //System.out.println(test.search(test.root, 13));
-        System.out.println(test.height());
+        //System.out.println(test.height());
         
     }
 }
