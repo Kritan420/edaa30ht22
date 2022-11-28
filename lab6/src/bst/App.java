@@ -5,18 +5,20 @@ public class App {
         BinarySearchTree<Integer> test = new BinarySearchTree<>();
 
 
-        System.out.println(test.add(10));
-        System.out.println(test.add(9));
-        System.out.println(test.add(15));
-        System.out.println(test.add(8));
-        System.out.println(test.add(14));
-        System.out.println(test.add(16));
-        System.out.println(test.add(13));
-        System.out.println(test.add(10));
-        System.out.println(test.add(10));
-        System.out.println(test.add(10));
+        test.add(10);
+        test.add(9);
+        test.add(15);
+        test.add(8);
+        test.add(14);
+        test.add(16);
+        test.add(13);
 
-        test.printTree();
+    //System.out.println(t);
+
+        //test.printTree();
+
+        //System.out.println(test.search(test.root, 13));
+        System.out.println(test.height());
         
     }
 }

@@ -35,7 +35,8 @@ public class BinarySearchTree<E> {
 	public boolean add(E x) {
 
 		root = insertAdd(root, x);
-		return true;
+		
+		return search(root, x);
 	}
 
 	private BinaryNode<E> insertAdd(BinaryNode<E> node, E x) {
@@ -54,6 +55,23 @@ public class BinarySearchTree<E> {
 		}
 		
 		return node;
+	}
+	public boolean search(BinaryNode<E> node, E x) {
+
+		while (!node.element.equals(x)) {
+			if (ccomparator.compare(node.element, x) > 0) {
+				node = node.left;
+			}else if (ccomparator.compare(node.element, x) < 0) {
+				node = node.right;		
+			}
+			if (node == null) {
+				return false;
+			}
+		}
+
+		return node.element.equals(x);
+		
+		
 	}
 
 
