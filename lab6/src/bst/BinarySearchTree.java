@@ -3,8 +3,6 @@ package bst;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import javax.swing.text.html.parser.Element;
-
 
 public class BinarySearchTree<E> {
   BinaryNode<E> root;  // Används också i BSTVisaulizer
@@ -27,6 +25,33 @@ public class BinarySearchTree<E> {
 		root = null;
 		size = 0;
 		ccomparator = comparator;
+	}
+
+	public static void main(String[] args) {
+		BSTVisualizer bstv = new BSTVisualizer("BinarySearchTree", 600, 600);
+		BinarySearchTree<Integer> test = new BinarySearchTree<>();
+
+
+		/**test.add(12);
+        test.add(6);
+		test.add(14);
+		test.add(5);
+		test.add(8);
+		test.add(18);
+		test.add(7);
+		test.add(9);
+		test.add(16);
+		test.add(19);*/
+
+		for (int i = 25; i > 0; i--) {
+			test.add(i);
+		}
+
+		bstv.drawTree(test);
+
+		test.rebuild();;
+		
+		bstv.drawTree(test);
 	}
 
 	/**
@@ -91,13 +116,13 @@ public class BinarySearchTree<E> {
 
 	private int calcHeight(BinaryNode<E> node) {
 
-		if (node == null || (root.left == null && root.right == null)) {
+		if (node == null) {
 			return 0;
 		} else {
 			int leftHeight = calcHeight(node.left);
 			int rightHeight = calcHeight(node.right);
 
-			return Math.max(leftHeight, rightHeight) +1;
+			return Math.max(leftHeight, rightHeight)+1;
 			
 		}
 
@@ -130,7 +155,7 @@ public class BinarySearchTree<E> {
 	private void printInOrder(BinaryNode<E> node) {
 		if (node != null) {
 			printInOrder(node.left);
-			System.out.print(node.element + " ");
+			System.out.println(node.element);
 			printInOrder(node.right);
 		}
 	}
@@ -139,6 +164,11 @@ public class BinarySearchTree<E> {
 	 * Builds a complete tree from the elements in the tree.
 	 */
 	public void rebuild() {
+		ArrayList<E> sorted = new ArrayList<>();
+		
+		toArray(root, sorted);
+
+		root = buildTree(sorted, 0, sorted.size()-1);
 
 	}
 	
@@ -146,7 +176,13 @@ public class BinarySearchTree<E> {
 	 * Adds all elements from the tree rooted at n in inorder to the list sorted.
 	 */
 	private void toArray(BinaryNode<E> n, ArrayList<E> sorted) {
-	
+		
+		if (n != null) {
+			toArray(n.left, sorted);
+			sorted.add(n.element);
+			toArray(n.right, sorted);
+		}
+
 	}
 	
 	/*
@@ -156,9 +192,24 @@ public class BinarySearchTree<E> {
 	 * Returns the root of tree.
 	 */
 	private BinaryNode<E> buildTree(ArrayList<E> sorted, int first, int last) {
-		return null;
-	}
 
+
+		int mid = (first + last) / 2;
+		System.out.println(mid);
+		BinaryNode<E> node = new BinaryNode<E>(sorted.get(mid));
+
+		if (first > last) {
+			node = null;
+			return node; 
+		} else if (first == last) {
+			return node;
+		}else { 
+			node.left = buildTree(sorted, first, mid-1);
+			node.right = buildTree(sorted, mid+1, last);
+			}
+			return node;
+		}
+	
 	static class BinaryNode<E> {
 		E element;
 		BinaryNode<E> left;
