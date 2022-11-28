@@ -29,10 +29,11 @@ public class BinarySearchTree<E> {
 
 	public static void main(String[] args) {
 		BSTVisualizer bstv = new BSTVisualizer("BinarySearchTree", 600, 600);
+		BSTVisualizer bstv2 = new BSTVisualizer("BinarySearchTree", 600, 600);
 		BinarySearchTree<Integer> test = new BinarySearchTree<>();
+		BinarySearchTree<String> testString = new BinarySearchTree<>((e1, e2) -> ((Comparable<String>) e2).compareTo(e1));
 
-
-		/**test.add(12);
+	/**	test.add(12);
         test.add(6);
 		test.add(14);
 		test.add(5);
@@ -43,15 +44,20 @@ public class BinarySearchTree<E> {
 		test.add(16);
 		test.add(19);*/
 
-		for (int i = 25; i > 0; i--) {
-			test.add(i);
-		}
+ 		testString.add("o");
+		testString.add("e");
+		testString.add("w");
+		testString.add("a");
+		testString.add("m");
+		testString.add("d");
+		testString.add("a");
+		testString.add("z");
 
-		bstv.drawTree(test);
+		bstv.drawTree(testString);
 
-		test.rebuild();;
+		testString.rebuild();
 		
-		bstv.drawTree(test);
+		bstv2.drawTree(testString);
 	}
 
 	/**
@@ -61,31 +67,38 @@ public class BinarySearchTree<E> {
 	 */
 	public boolean add(E x) {
 
-		if (search(root, x)) {
-			return false;
+		if (root == null) {
+			root = new BinaryNode<E>(x);
+			size++;
+			return true;
+		}else {
+			return insertAdd(root, x);
 		}
 
-		root = insertAdd(root, x);
-
-		return search(root, x);
 	}
 
-	private BinaryNode<E> insertAdd(BinaryNode<E> node, E x) {
+	private boolean insertAdd(BinaryNode<E> node, E x) {
 
-		if (node == null ) {
-			node = new BinaryNode<E>(x);
-			size++;
-			return node;
-		}
-		else {
-			if (ccomparator.compare(node.element, x) > 0) {
-				node.left = insertAdd(node.left, x);
-			} else if (ccomparator.compare(node.element, x) < 0) {
-				node.right = insertAdd(node.right, x);
-			} 
-		}
+
+		if (ccomparator.compare(node.element, x) > 0) {
+			if (node.left == null) {
+				node.left = new BinaryNode<E>(x);
+				size++;
+				return true;
+			}
+			return insertAdd(node.left, x);
+
+		} else if (ccomparator.compare(node.element, x) < 0) {
+			if (node.right == null) {
+				node.right = new BinaryNode<E>(x);
+				size++;
+				return true;
+			}
+			return insertAdd(node.right, x);
+			}
 		
-		return node;
+		
+		return false;
 	}
 
 	public boolean search(BinaryNode<E> node, E x) {
@@ -168,7 +181,7 @@ public class BinarySearchTree<E> {
 		
 		toArray(root, sorted);
 
-		root = buildTree(sorted, 0, sorted.size()-1);
+		root = buildTree(sorted, sorted.indexOf(sorted.get(0)), sorted.indexOf(sorted.get(sorted.size()-1)));
 
 	}
 	
@@ -195,7 +208,6 @@ public class BinarySearchTree<E> {
 
 
 		int mid = (first + last) / 2;
-		System.out.println(mid);
 		BinaryNode<E> node = new BinaryNode<E>(sorted.get(mid));
 
 		if (first > last) {

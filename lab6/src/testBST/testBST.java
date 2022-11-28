@@ -16,15 +16,18 @@ import java.util.Iterator;
 
 class  testBST {
 	private BinarySearchTree<Integer>  myBST;
+	private BinarySearchTree<String>  myBST2;
 
 	@BeforeEach
 	void setUp() {
 		myBST = new BinarySearchTree<Integer>();
+		myBST2 = new BinarySearchTree<String>((e1, e2) -> (e2).compareTo(e1));
 	}
 
 	@AfterEach
 	void tearDown(){
         myBST = null;
+		myBST2 = null;
 	}
 
 	/**
@@ -33,14 +36,18 @@ class  testBST {
 	@Test
 	void testNewBST() {
 		assertEquals(0, myBST.size(), "Wrong size of empty queue");
+		assertEquals(0, myBST2.size(), "Wrong size of empty queue");
 	}
 
-	/** Test a single add followed by a single peek. */
+	/** Test a single add */
 	@Test
 	void testAddOne() {
 		myBST.add(1);
 		assertEquals(1, myBST.size(), "Wrong size of queue");
-        assertEquals(0, myBST.height(), "Wrong height of queue");
+        assertEquals(1, myBST.height(), "Wrong height of queue");
+		myBST2.add("A");
+		assertEquals(1, myBST2.size(), "Wrong size of queue");
+        assertEquals(1, myBST2.height(), "Wrong height of queue");
 	}
     	/** Test multiple add followed by a single peek. */
 	@Test
@@ -54,6 +61,40 @@ class  testBST {
 		myBST.add(16);
 		assertEquals(7, myBST.size(), "Wrong size of queue");
         assertEquals(3, myBST.height(), "Wrong height of queue");
+		myBST2.add("a");
+        myBST2.add("b");
+        myBST2.add("c");
+        myBST2.add("d");
+        myBST2.add("e");
+        myBST2.add("f");
+		myBST2.add("g");
+		assertEquals(7, myBST.size(), "Wrong size of queue");
+        assertEquals(3, myBST.height(), "Wrong height of queue");
+	}
+
+	    	/** Test multiple add followed by clear. */
+	@Test
+	void testClear() {
+		myBST.add(10);
+        myBST.add(5);
+        myBST.add(15);
+        myBST.add(3);
+        myBST.add(6);
+        myBST.add(11);
+		myBST.add(16);
+		myBST.clear();
+		myBST2.add("a");
+        myBST2.add("b");
+        myBST2.add("c");
+        myBST2.add("d");
+        myBST2.add("e");
+        myBST2.add("f");
+		myBST2.add("g");
+		myBST2.clear();
+		assertEquals(0, myBST2.size(), "Wrong size of queue after clear");
+        assertEquals(0, myBST2.height(), "Wrong height of queue after clear");
+		assertEquals(0, myBST.size(), "Wrong size of queue after clear");
+        assertEquals(0, myBST.height(), "Wrong height of queue after clear");
 	}
 
 
