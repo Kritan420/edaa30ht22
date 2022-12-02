@@ -3,6 +3,22 @@ package bst;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * F1a: 10 20 30 47
+ * F1b: 3
+ * F1c: 4
+ * F2: 0
+ * F2: Maxdjup för nod
+ * F2: Math.max
+ * 	First + (last-first) / 2
+ * 
+ * 
+ * Slippa skicka in alla parametrar vid t.ex. rebuild
+ * Använda root som allmän node
+ * 
+ * 
+ * Linkedlist jobbigt pga mid, funkar säkert men finns ju bara first och last som index
+ */
 
 public class BinarySearchTree<E> {
   BinaryNode<E> root;  // Används också i BSTVisaulizer
@@ -30,10 +46,10 @@ public class BinarySearchTree<E> {
 	public static void main(String[] args) {
 		BSTVisualizer bstv = new BSTVisualizer("BinarySearchTree", 600, 600);
 		BSTVisualizer bstv2 = new BSTVisualizer("BinarySearchTree", 600, 600);
-		BinarySearchTree<Integer> test = new BinarySearchTree<>();
+		//BinarySearchTree<Integer> test = new BinarySearchTree<>();
 		BinarySearchTree<String> testString = new BinarySearchTree<>((e1, e2) -> ((Comparable<String>) e2).compareTo(e1));
 
-	/**	test.add(12);
+		/** test.add(12);
         test.add(6);
 		test.add(14);
 		test.add(5);
@@ -42,9 +58,9 @@ public class BinarySearchTree<E> {
 		test.add(7);
 		test.add(9);
 		test.add(16);
-		test.add(19);*/
+		test.add(19); */
 
- 		testString.add("o");
+  		
 		testString.add("e");
 		testString.add("w");
 		testString.add("a");
@@ -52,6 +68,16 @@ public class BinarySearchTree<E> {
 		testString.add("d");
 		testString.add("a");
 		testString.add("z");
+		testString.add("y");
+		testString.add("b");
+		testString.add("o");
+		testString.add("z");
+		testString.add("p");
+		testString.add("q"); 
+
+		/** for (int i = 1; i < 25; i++) {
+			test.add(i);
+		}*/
 
 		bstv.drawTree(testString);
 
@@ -74,7 +100,6 @@ public class BinarySearchTree<E> {
 		}else {
 			return insertAdd(root, x);
 		}
-
 	}
 
 	private boolean insertAdd(BinaryNode<E> node, E x) {
@@ -96,8 +121,7 @@ public class BinarySearchTree<E> {
 			}
 			return insertAdd(node.right, x);
 			}
-		
-		
+
 		return false;
 	}
 
@@ -181,7 +205,7 @@ public class BinarySearchTree<E> {
 		
 		toArray(root, sorted);
 
-		root = buildTree(sorted, sorted.indexOf(sorted.get(0)), sorted.indexOf(sorted.get(sorted.size()-1)));
+		root = buildTree(sorted, 0, sorted.size()-1);
 
 	}
 	
@@ -207,7 +231,7 @@ public class BinarySearchTree<E> {
 	private BinaryNode<E> buildTree(ArrayList<E> sorted, int first, int last) {
 
 
-		int mid = (first + last) / 2;
+		int mid = first + (last-first) / 2;
 		BinaryNode<E> node = new BinaryNode<E>(sorted.get(mid));
 
 		if (first > last) {

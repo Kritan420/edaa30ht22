@@ -39,10 +39,12 @@ class  testBST {
 		assertEquals(0, myBST2.size(), "Wrong size of empty queue");
 	}
 
+	
 	/** Test a single add */
 	@Test
 	void testAddOne() {
-		myBST.add(1);
+		assertTrue(myBST.add(1), "add boolean error");
+		assertFalse(myBST.add(1), "Add boolean error");
 		assertEquals(1, myBST.size(), "Wrong size of queue");
         assertEquals(1, myBST.height(), "Wrong height of queue");
 		myBST2.add("A");
@@ -59,6 +61,7 @@ class  testBST {
         myBST.add(6);
         myBST.add(11);
 		myBST.add(16);
+		assertFalse(myBST.add(10), "Add boolean error");
 		assertEquals(7, myBST.size(), "Wrong size of queue");
         assertEquals(3, myBST.height(), "Wrong height of queue");
 		myBST2.add("a");
@@ -68,6 +71,7 @@ class  testBST {
         myBST2.add("e");
         myBST2.add("f");
 		myBST2.add("g");
+		assertFalse(myBST2.add("a"), "Add boolean error");
 		assertEquals(7, myBST.size(), "Wrong size of queue");
         assertEquals(3, myBST.height(), "Wrong height of queue");
 	}
